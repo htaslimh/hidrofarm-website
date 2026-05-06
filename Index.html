@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HidroFarm — Masa Depan Pertanian</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --gray-100: #f5f5f7;
+  --gray-200: #e8e8ed;
+  --gray-400: #a1a1a6;
+  --gray-600: #6e6e73;
+  --gray-800: #1d1d1f;
+  --green: #1a7a3a;
+  --green-light: #30d158;
+  --green-pale: #f0faf2;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--sans);
+  background: var(--white);
+  color: var(--black);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 200;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  transition: border-color 0.3s;
+}
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--black);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nav-center {
+  display: flex;
+  gap: 2.5rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-center a {
+  font-size: 0.78rem;
+  color: var(--gray-600);
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.2s;
+}
+
+.nav-center a:hover { color: var(--black); }
+
+.nav-right { display: flex; align-items: center; gap: 1.25rem; }
+
+.nav-link {
+  font-size: 0.78rem;
+  color: var(--green);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-pill {
+  background: var(--black);
+  color: var(--white);
+  padding: 0.4rem 0.95rem;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nav-pill:hover { background: #2a2a2a; }
+
+/* ── HERO ── */
+#beranda {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 9rem 2rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(ellipse, rgba(48,209,88,0.07) 0%, transparent 68%);
+  pointer-events: none;
+  animation: glow 8s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%,100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.1); }
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  font-weight: 400;
+  margin-bottom: 1.75rem;
+  opacity: 0;
+  animation: up 0.9s 0.1s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: var(--black);
+  max-width: 920px;
+  margin-bottom: 1.75rem;
+  opacity: 0;
+  animation: up 0.9s 0.2s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+.hero-h1 em { font-style: italic; color: var(--green); }
+
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--gray-600);
+  max-width: 540px;
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: up 0.9s 0.3s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  animation: up 0.9s 0.4s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+.btn-dark {
+  background: var(--black);
+  color: var(--white);
+  padding: 0.875rem 2rem;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  font-family: var(--sans);
+}
+
+.btn-dark:hover { background: #2a2a2a; transform: scale(1.02); }
+
+.btn-text {
+  color: var(--green);
+  font-size: 0.875rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.2s;
+}
+
+.btn-text:hover { gap: 9px; }
+
+.hero-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 960px;
+  margin-top: 5rem;
+  opacity: 0;
+  animation: up 1s 0.6s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+.hcard {
+  background: var(--gray-100);
+  border-radius: 22px;
+  padding: 2rem;
+  text-align: left;
+  border: 1px solid transparent;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s, border-color 0.2s;
+}
+
+.hcard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.07);
+  border-color: var(--gray-200);
+}
+
+.hc-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+.hc-lbl { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); margin-bottom: 0.35rem; }
+.hc-num { font-family: var(--serif); font-size: 2.8rem; color: var(--black); letter-spacing: -0.03em; line-height: 1; margin-bottom: 0.3rem; }
+.hc-desc { font-size: 0.8rem; color: var(--gray-600); font-weight: 300; line-height: 1.5; }
+.hc-chip { display: inline-block; margin-top: 0.85rem; font-size: 0.63rem; font-weight: 500; letter-spacing: 0.06em; padding: 3px 10px; border-radius: 100px; background: var(--green-pale); color: var(--green); }
+
+@keyframes up {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  overflow: hidden;
+  background: var(--black);
+  padding: 1rem 0;
+  border-top: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.mtrack {
+  display: flex;
+  width: max-content;
+  animation: scroll 28s linear infinite;
+}
+
+.mitem {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 2rem;
+  font-size: 0.73rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.mdot { width: 3px; height: 3px; background: var(--green-light); border-radius: 50%; }
+
+@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── SECTIONS ── */
+section { padding: 8rem 6%; }
+
+.ey { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--green); margin-bottom: 1rem; font-weight: 400; }
+
+.sh2 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--black);
+  margin-bottom: 1.1rem;
+}
+
+.slead {
+  font-size: 1rem;
+  color: var(--gray-600);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 540px;
+}
+
+/* ── TENTANG ── */
+#tentang { background: var(--gray-100); }
+
+.t-head { text-align: center; margin-bottom: 5rem; }
+.t-head .slead { margin: 0 auto; }
+
+.sys-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.sys-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2rem 1.75rem;
+  border: 1px solid transparent;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s, border-color 0.2s;
+}
+
+.sys-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+  border-color: var(--gray-200);
+}
+
+.sn { font-family: var(--serif); font-size: 3.2rem; color: var(--gray-200); line-height: 1; margin-bottom: 1.5rem; }
+.sname { font-size: 0.95rem; font-weight: 500; color: var(--black); margin-bottom: 0.4rem; }
+.sdesc { font-size: 0.78rem; color: var(--gray-600); line-height: 1.65; font-weight: 300; }
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.stat-card {
+  background: var(--black);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+}
+
+.stat-big { font-family: var(--serif); font-size: 4rem; color: var(--green-light); letter-spacing: -0.03em; line-height: 1; margin-bottom: 0.4rem; }
+.stat-lbl { font-size: 0.82rem; color: rgba(255,255,255,0.45); font-weight: 300; }
+
+/* ── PRODUK ── */
+#produk { background: var(--white); }
+
+.p-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }
+
+.filters { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+
+.ftab {
+  font-size: 0.78rem;
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  border: 1px solid var(--gray-200);
+  background: transparent;
+  color: var(--gray-600);
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: all 0.2s;
+}
+
+.ftab.on, .ftab:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+
+.pgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+  gap: 1.25rem;
+}
+
+.pc {
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--white);
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s, border-color 0.25s;
+}
+
+.pc:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.09);
+  border-color: transparent;
+}
+
+.pimg {
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4.5rem;
+  position: relative;
+}
+
+.pi1 { background: #f0faf2; }
+.pi2 { background: #f0f4fa; }
+.pi3 { background: #fafaf0; }
+.pi4 { background: #faf0f4; }
+
+.ptag {
+  position: absolute;
+  top: 1rem; left: 1rem;
+  font-size: 0.62rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 3px 9px;
+  border-radius: 100px;
+  background: var(--black);
+  color: var(--white);
+}
+
+.ptag.new { background: var(--green); }
+
+.pbody { padding: 1.35rem; }
+.pname { font-size: 0.92rem; font-weight: 500; color: var(--black); margin-bottom: 0.3rem; letter-spacing: -0.01em; }
+.pdesc { font-size: 0.78rem; color: var(--gray-600); line-height: 1.6; margin-bottom: 1.1rem; font-weight: 300; }
+.pfoot { display: flex; align-items: center; justify-content: space-between; }
+.pprice { font-family: var(--serif); font-size: 1.1rem; color: var(--black); letter-spacing: -0.02em; }
+
+.padd {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, transform 0.15s;
+  font-family: var(--sans);
+  line-height: 1;
+}
+
+.padd:hover { background: var(--green); transform: scale(1.1); }
+
+/* ── PANDUAN ── */
+#panduan { background: var(--black); color: var(--white); }
+
+.pan-top { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; margin-bottom: 5rem; align-items: start; }
+
+#panduan .sh2 { color: var(--white); }
+#panduan .ey { color: var(--green-light); }
+#panduan .slead { color: rgba(255,255,255,0.45); max-width: 100%; }
+
+.steps { list-style: none; display: flex; flex-direction: column; }
+
+.step {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.step:last-child { border-bottom: none; }
+
+.step-i { font-family: var(--serif); font-size: 0.95rem; color: rgba(255,255,255,0.18); min-width: 26px; padding-top: 2px; }
+.step-t { font-size: 0.88rem; font-weight: 500; color: var(--white); margin-bottom: 3px; }
+.step-d { font-size: 0.78rem; color: rgba(255,255,255,0.38); font-weight: 300; }
+
+.pan-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.pgcell {
+  background: var(--black);
+  padding: 2.25rem;
+  transition: background 0.2s;
+}
+
+.pgcell:hover { background: #0f0f0f; }
+
+.pgicon { font-size: 1.4rem; margin-bottom: 1.2rem; }
+.pgt { font-size: 0.87rem; font-weight: 500; color: var(--white); margin-bottom: 0.4rem; }
+.pgd { font-size: 0.77rem; color: rgba(255,255,255,0.38); line-height: 1.65; font-weight: 300; }
+
+/* ── BLOG ── */
+#blog { background: var(--gray-100); }
+
+.blog-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem; }
+
+.see-all {
+  font-size: 0.83rem;
+  color: var(--green);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.2s;
+}
+
+.see-all:hover { gap: 9px; }
+
+.bgrid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.25rem;
+}
+
+.bcard {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.bcard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.09);
+}
+
+.bcard.feat { grid-row: span 2; display: flex; flex-direction: column; }
+
+.bthumb {
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+}
+
+.bcard.feat .bthumb { height: auto; flex: 1; min-height: 300px; }
+
+.bt1 { background: linear-gradient(140deg, #e8f5ea, #c5dfc9); }
+.bt2 { background: linear-gradient(140deg, #faf5e8, #e8d8b0); }
+.bt3 { background: linear-gradient(140deg, #e8f0fa, #b8cde8); }
+
+.bbody { padding: 1.5rem; }
+.bcat { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green); margin-bottom: 0.45rem; font-weight: 500; }
+.btitle { font-family: var(--serif); font-size: 1.1rem; line-height: 1.3; color: var(--black); letter-spacing: -0.01em; margin-bottom: 0.45rem; }
+.bcard.feat .btitle { font-size: 1.5rem; }
+.bmeta { font-size: 0.73rem; color: var(--gray-400); }
+
+/* ── KONTAK ── */
+#kontak { background: var(--white); }
+
+.kgrid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 7rem; align-items: start; max-width: 1100px; margin: 0 auto; }
+
+.klead { margin-bottom: 2.5rem; }
+
+.clist { display: flex; flex-direction: column; }
+
+.citem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.citem:last-child { border-bottom: none; }
+
+.cdot { width: 7px; height: 7px; background: var(--green-light); border-radius: 50%; flex-shrink: 0; }
+.clbl { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--gray-400); margin-bottom: 2px; }
+.cval { font-size: 0.9rem; color: var(--black); }
+
+.fwrap { display: flex; flex-direction: column; gap: 1.1rem; }
+
+.fg { display: flex; flex-direction: column; gap: 0.4rem; }
+.fg label { font-size: 0.72rem; font-weight: 500; color: var(--gray-600); letter-spacing: 0.02em; }
+
+.fg input, .fg select, .fg textarea {
+  width: 100%;
+  padding: 0.82rem 1rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  color: var(--black);
+  background: var(--gray-100);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  font-weight: 300;
+  appearance: none;
+}
+
+.fg input:focus, .fg select:focus, .fg textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px rgba(26,122,58,0.08);
+  background: var(--white);
+}
+
+.fg textarea { resize: vertical; min-height: 115px; }
+.frow2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.fsend {
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-family: var(--sans);
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.fsend:hover { background: #2a2a2a; transform: scale(1.02); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  color: rgba(255,255,255,0.4);
+  padding: 5rem 6% 3rem;
+}
+
+.ftop {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.flogo {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  color: var(--white);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.fbrand p { font-size: 0.82rem; line-height: 1.8; margin-bottom: 1.75rem; font-weight: 300; }
+
+.socs { display: flex; gap: 0.6rem; }
+
+.soc {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: rgba(255,255,255,0.4);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.soc:hover { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.75); }
+
+.fcol h5 { font-size: 0.77rem; font-weight: 500; color: var(--white); margin-bottom: 1.25rem; }
+.fcol ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.fcol ul li a { font-size: 0.8rem; color: rgba(255,255,255,0.38); text-decoration: none; transition: color 0.2s; font-weight: 300; }
+.fcol ul li a:hover { color: rgba(255,255,255,0.75); }
+
+.fbot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.fbot p { font-size: 0.77rem; }
+.fblinks { display: flex; gap: 1.5rem; }
+.fblinks a { font-size: 0.77rem; color: rgba(255,255,255,0.28); text-decoration: none; transition: color 0.2s; }
+.fblinks a:hover { color: rgba(255,255,255,0.6); }
+
+/* ── REVEAL ── */
+.sr {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+}
+
+.sr.in { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .hero-cards { grid-template-columns: 1fr 1fr; }
+  .sys-grid { grid-template-columns: 1fr 1fr; }
+  .pan-top { grid-template-columns: 1fr; gap: 3rem; }
+  .pan-grid { grid-template-columns: 1fr 1fr; }
+  .bgrid { grid-template-columns: 1fr; }
+  .bcard.feat { grid-row: auto; }
+  .kgrid { grid-template-columns: 1fr; gap: 3.5rem; }
+  .ftop { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  section { padding: 5rem 5%; }
+  nav { padding: 0 5%; }
+  .nav-center { display: none; }
+  .hero-cards { grid-template-columns: 1fr; }
+  .sys-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr; }
+  .pan-grid { grid-template-columns: 1fr 1fr; }
+  .frow2 { grid-template-columns: 1fr; }
+  .ftop { grid-template-columns: 1fr; gap: 2.5rem; }
+  .fbot { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .hero-h1 { font-size: 3rem; }
+  .pan-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <a href="#beranda" class="nav-logo">HidroFarm</a>
+  <div class="nav-center">
+    <a href="#tentang">Tentang</a>
+    <a href="#produk">Produk</a>
+    <a href="#panduan">Panduan</a>
+    <a href="#blog">Blog</a>
+    <a href="#kontak">Kontak</a>
+  </div>
+  <div class="nav-right">
+    <a href="#produk" class="nav-link">Belanja</a>
+    <a href="#kontak" class="nav-pill">Konsultasi Gratis</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="beranda">
+  <div class="hero-glow"></div>
+  <p class="eyebrow">Pertanian Hidroponik Modern</p>
+  <h1 class="hero-h1">Tanam lebih cerdas.<br><em>Panen lebih banyak.</em></h1>
+  <p class="hero-sub">Solusi hidroponik lengkap — dari starter kit untuk rumahan hingga sistem komersial skala besar. Tumbuh 3× lebih cepat, hemat air 90%.</p>
+  <div class="hero-btns">
+    <a href="#produk" class="btn-dark">Lihat Produk</a>
+    <a href="#panduan" class="btn-text">Pelajari Hidroponik →</a>
+  </div>
+  <div class="hero-cards">
+    <div class="hcard">
+      <div class="hc-icon">💧</div>
+      <div class="hc-lbl">Efisiensi Air</div>
+      <div class="hc-num">90%</div>
+      <div class="hc-desc">lebih hemat dibanding pertanian konvensional berbasis tanah</div>
+      <div class="hc-chip">Terverifikasi</div>
+    </div>
+    <div class="hcard">
+      <div class="hc-icon">🌱</div>
+      <div class="hc-lbl">Kecepatan Tumbuh</div>
+      <div class="hc-num">3×</div>
+      <div class="hc-desc">lebih cepat dengan suplai nutrisi langsung ke akar tanaman</div>
+      <div class="hc-chip">Rata-rata Hasil</div>
+    </div>
+    <div class="hcard">
+      <div class="hc-icon">🏡</div>
+      <div class="hc-lbl">Pelanggan Aktif</div>
+      <div class="hc-num">2.4k</div>
+      <div class="hc-desc">petani urban aktif di seluruh penjuru Indonesia</div>
+      <div class="hc-chip">2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="mtrack">
+    <div class="mitem"><span class="mdot"></span>Selada Butterhead<span class="mdot"></span>Kangkung Hijau<span class="mdot"></span>Bayam Merah<span class="mdot"></span>Basil Italia<span class="mdot"></span>Tomat Cherry<span class="mdot"></span>Pakcoy<span class="mdot"></span>Caisim<span class="mdot"></span>Kailan<span class="mdot"></span>Sawi Hijau<span class="mdot"></span>Mint<span class="mdot"></span>Seledri<span class="mdot"></span>Stroberi<span class="mdot"></span>Cabai Rawit</div>
+    <div class="mitem"><span class="mdot"></span>Selada Butterhead<span class="mdot"></span>Kangkung Hijau<span class="mdot"></span>Bayam Merah<span class="mdot"></span>Basil Italia<span class="mdot"></span>Tomat Cherry<span class="mdot"></span>Pakcoy<span class="mdot"></span>Caisim<span class="mdot"></span>Kailan<span class="mdot"></span>Sawi Hijau<span class="mdot"></span>Mint<span class="mdot"></span>Seledri<span class="mdot"></span>Stroberi<span class="mdot"></span>Cabai Rawit</div>
+  </div>
+</div>
+
+<!-- TENTANG -->
+<section id="tentang">
+  <div class="t-head sr">
+    <p class="ey">Tentang Hidroponik</p>
+    <h2 class="sh2">Bertani tanpa tanah,<br>panen tanpa batas.</h2>
+    <p class="slead">Hidroponik adalah metode bercocok tanam menggunakan larutan nutrisi berbasis air — tanpa tanah. Tanaman tumbuh lebih sehat, lebih cepat, dan bisa dilakukan di mana saja.</p>
+  </div>
+
+  <div class="sys-grid sr">
+    <div class="sys-card">
+      <div class="sn">01</div>
+      <div class="sname">NFT System</div>
+      <div class="sdesc">Nutrient Film Technique. Aliran tipis larutan nutrisi mengalir terus-menerus melalui akar tanaman di dalam pipa.</div>
+    </div>
+    <div class="sys-card">
+      <div class="sn">02</div>
+      <div class="sname">DFT System</div>
+      <div class="sdesc">Deep Flow Technique. Akar terendam larutan nutrisi yang dalam untuk penyerapan maksimal dan pertumbuhan stabil.</div>
+    </div>
+    <div class="sys-card">
+      <div class="sn">03</div>
+      <div class="sname">Aeroponik</div>
+      <div class="sdesc">Akar disemprot kabut nutrisi secara periodik. Aerasi optimal, pertumbuhan tercepat dibanding sistem lainnya.</div>
+    </div>
+    <div class="sys-card">
+      <div class="sn">04</div>
+      <div class="sname">Wick System</div>
+      <div class="sdesc">Sumbu menyerap nutrisi ke media tanam. Paling sederhana dan ideal untuk pemula yang baru memulai.</div>
+    </div>
+  </div>
+
+  <div class="stats-row sr">
+    <div class="stat-card">
+      <div class="stat-big">90%</div>
+      <div class="stat-lbl">Lebih hemat air dari pertanian tanah konvensional</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-big">3×</div>
+      <div class="stat-lbl">Pertumbuhan lebih cepat dengan nutrisi langsung ke akar</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-big">0</div>
+      <div class="stat-lbl">Pestisida kimia dibutuhkan untuk sayuran yang sehat</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUK -->
+<section id="produk">
+  <div class="p-top sr">
+    <div>
+      <p class="ey">Produk</p>
+      <h2 class="sh2">Lengkapi kebun<br>hidroponikmu.</h2>
+    </div>
+    <div class="filters">
+      <button class="ftab on" onclick="fp(this,'all')">Semua</button>
+      <button class="ftab" onclick="fp(this,'starter')">Starter Kit</button>
+      <button class="ftab" onclick="fp(this,'nutrisi')">Nutrisi</button>
+      <button class="ftab" onclick="fp(this,'alat')">Peralatan</button>
+      <button class="ftab" onclick="fp(this,'bibit')">Bibit</button>
+    </div>
+  </div>
+
+  <div class="pgrid sr" id="pg">
+    <div class="pc" data-c="starter">
+      <div class="pimg pi1">🌿<span class="ptag">Terlaris</span></div>
+      <div class="pbody">
+        <div class="pname">Starter Kit NFT Rumahan</div>
+        <div class="pdesc">Paket lengkap untuk pemula. Pipa, pompa, net pot & nutrisi awal untuk 30 tanaman.</div>
+        <div class="pfoot"><span class="pprice">Rp 485.000</span><button class="padd" onclick="ac(this)">+</button></div>
+      </div>
+    </div>
+    <div class="pc" data-c="nutrisi">
+      <div class="pimg pi2">🧪</div>
+      <div class="pbody">
+        <div class="pname">AB Mix Sayuran 1 Liter</div>
+        <div class="pdesc">Formula nutrisi lengkap khusus sayuran daun. pH stabil, hasil panen optimal.</div>
+        <div class="pfoot"><span class="pprice">Rp 65.000</span><button class="padd" onclick="ac(this)">+</button></div>
+      </div>
+    </div>
+    <div class="pc" data-c="alat">
+      <div class="pimg pi3">💡<span class="ptag new">Baru</span></div>
+      <div class="pbody">
+        <div class="pname">Grow Light LED Full Spectrum</div>
+        <div class="pdesc">45W, ideal untuk indoor farming. Hemat energi, tahan hingga 50.000 jam pemakaian.</div>
+        <div class="pfoot"><span class="pprice">Rp 320.000</span><button class="padd" onclick="ac(this)">+</button></div>
+      </div>
+    </div>
+    <div class="pc" data-c="bibit">
+      <div class="pimg pi4">🥬</div>
+      <div class="pbody">
+        <div class="pname">Paket Benih Premium Mix</div>
+        <div class="pdesc">10 varietas sayuran & herbal pilihan: selada, bayam, kangkung, basil, dan lainnya.</div>
+        <div class="pfoot"><span class="pprice">Rp 45.000</span><button class="padd" onclick="ac(this)">+</button></div>
+      </div>
+    </div>
+    <div class="pc" data-c="starter">
+      <div class="pimg pi1">🏗️</div>
+      <div class="pbody">
+        <div class="pname">Starter Kit DFT 60 Lubang</div>
+        <div class="pdesc">Kapasitas besar untuk semi-komersial. Termasuk panduan pemasangan lengkap.</div>
+        <div class="pfoot"><span class="pprice">Rp 1.250.000</span><button class="padd" onclick="ac(this)">+</button></div>
+      </div>
+    </div>
+    <div class="pc" data-c="alat">
+      <div class="pimg pi2">📊</div>
+      <div class="pbody">
+        <div class="pname">TDS & pH Meter Digital</div>
+        <div class="pdesc">Ukur kadar nutrisi dan keasaman larutan. Akurasi tinggi dengan kalibrasi mudah.</div>
+        <div class="pfoot"><span class="pprice">Rp 95.000</span><button class="padd" onclick="ac(this)">+</button></div>
+      </div>
+    </div>
+    <div class="pc" data-c="nutrisi">
+      <div class="pimg pi3">🌊</div>
+      <div class="pbody">
+        <div class="pname">AB Mix Buah & Tomat</div>
+        <div class="pdesc">Formula khusus tanaman buah. Tingkatkan produksi hingga 40% lebih lebat.</div>
+        <div class="pfoot"><span class="pprice">Rp 85.000</span><button class="padd" onclick="ac(this)">+</button></div>
+      </div>
+    </div>
+    <div class="pc" data-c="alat">
+      <div class="pimg pi4">💧</div>
+      <div class="pbody">
+        <div class="pname">Pompa Sirkulasi 1000 L/H</div>
+        <div class="pdesc">Submersible senyap dan tahan lama. Cocok untuk sistem NFT dan DFT skala rumahan.</div>
+        <div class="pfoot"><span class="pprice">Rp 150.000</span><button class="padd" onclick="ac(this)">+</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PANDUAN -->
+<section id="panduan">
+  <div class="pan-top sr">
+    <div>
+      <p class="ey">Panduan</p>
+      <h2 class="sh2">Dari nol.<br>Jadi ahli.</h2>
+      <p class="slead">Panduan terstruktur dari dasar hingga teknik lanjutan. Gratis untuk semua pengguna HidroFarm.</p>
+    </div>
+    <ul class="steps">
+      <li class="step"><span class="step-i">01</span><div><div class="step-t">Pilih sistem yang sesuai</div><div class="step-d">NFT untuk sayuran daun, DFT untuk kapasitas besar, wick untuk pemula</div></div></li>
+      <li class="step"><span class="step-i">02</span><div><div class="step-t">Siapkan peralatan & media tanam</div><div class="step-d">Rockwool, net pot, pipa, pompa, dan wadah nutrisi</div></div></li>
+      <li class="step"><span class="step-i">03</span><div><div class="step-t">Larutkan nutrisi AB Mix dengan benar</div><div class="step-d">Campurkan A dan B ke air terpisah, atur EC dan pH sesuai tanaman</div></div></li>
+      <li class="step"><span class="step-i">04</span><div><div class="step-t">Semai benih di rockwool</div><div class="step-d">Jaga kelembapan, beri cahaya 12–16 jam per hari untuk hasil optimal</div></div></li>
+      <li class="step"><span class="step-i">05</span><div><div class="step-t">Monitor pH & EC secara rutin</div><div class="step-d">pH ideal 5.5–6.5 untuk sebagian besar sayuran daun</div></div></li>
+      <li class="step"><span class="step-i">06</span><div><div class="step-t">Panen & nikmati hasilnya</div><div class="step-d">Selada siap panen 25–35 hari setelah semai</div></div></li>
+    </ul>
+  </div>
+  <div class="pan-grid sr">
+    <div class="pgcell"><div class="pgicon">🎥</div><div class="pgt">Video Tutorial</div><div class="pgd">40+ video panduan step-by-step dari merakit sistem hingga mengatasi hama tanaman.</div></div>
+    <div class="pgcell"><div class="pgicon">🧪</div><div class="pgt">Kalkulator Nutrisi</div><div class="pgd">Hitung takaran nutrisi otomatis berdasarkan volume air dan jenis tanaman.</div></div>
+    <div class="pgcell"><div class="pgicon">🌿</div><div class="pgt">Ensiklopedia Tanaman</div><div class="pgd">60+ tanaman dengan kebutuhan nutrisi, waktu panen, dan tips perawatan spesifik.</div></div>
+    <div class="pgcell"><div class="pgicon">🆘</div><div class="pgt">Diagnosa Masalah</div><div class="pgd">Identifikasi penyebab daun menguning, layu, atau defisiensi nutrisi dan solusinya.</div></div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="blog-top sr">
+    <div>
+      <p class="ey">Blog</p>
+      <h2 class="sh2">Inspirasi dari<br>petani urban.</h2>
+    </div>
+    <a href="#" class="see-all">Semua artikel →</a>
+  </div>
+  <div class="bgrid sr">
+    <a class="bcard feat" href="#">
+      <div class="bthumb bt1">🥬</div>
+      <div class="bbody">
+        <div class="bcat">Tips & Trik</div>
+        <div class="btitle">Cara Meningkatkan Hasil Panen Selada Hingga 3 Kali Lipat dengan Teknik EC Bertahap</div>
+        <div class="bmeta">Tim HidroFarm · 5 Mei 2025</div>
+      </div>
+    </a>
+    <a class="bcard" href="#">
+      <div class="bthumb bt2">🏡</div>
+      <div class="bbody">
+        <div class="bcat">Kisah Sukses</div>
+        <div class="btitle">Dari Balkon 3m², Ibu Rini Hasilkan 20kg Sayuran per Bulan</div>
+        <div class="bmeta">Redaksi · 1 Mei 2025</div>
+      </div>
+    </a>
+    <a class="bcard" href="#">
+      <div class="bthumb bt3">🤖</div>
+      <div class="bbody">
+        <div class="bcat">Teknologi</div>
+        <div class="btitle">Sensor IoT untuk Monitoring Hidroponik Otomatis di Rumah</div>
+        <div class="bmeta">Dimas A. · 28 Apr 2025</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak">
+  <div class="kgrid">
+    <div class="sr">
+      <p class="ey">Kontak</p>
+      <h2 class="sh2">Ada pertanyaan?<br>Kami di sini.</h2>
+      <p class="slead klead">Tim konsultan kami siap membantu memilih sistem yang tepat — dari perencanaan hingga panen pertama.</p>
+      <div class="clist">
+        <div class="citem"><div class="cdot"></div><div><div class="clbl">Lokasi</div><div class="cval">Jl. Raya Kebun No. 12, Jakarta Selatan</div></div></div>
+        <div class="citem"><div class="cdot"></div><div><div class="clbl">WhatsApp</div><div class="cval">+62 812-3456-7890</div></div></div>
+        <div class="citem"><div class="cdot"></div><div><div class="clbl">Email</div><div class="cval">halo@hidrofarm.id</div></div></div>
+        <div class="citem"><div class="cdot"></div><div><div class="clbl">Jam Operasional</div><div class="cval">Senin–Sabtu, 08.00–17.00 WIB</div></div></div>
+      </div>
+    </div>
+    <div class="sr">
+      <div class="fwrap">
+        <div class="frow2">
+          <div class="fg"><label>Nama Lengkap</label><input type="text" placeholder="Nama kamu"></div>
+          <div class="fg"><label>Email</label><input type="email" placeholder="email@contoh.com"></div>
+        </div>
+        <div class="fg">
+          <label>Topik Konsultasi</label>
+          <select>
+            <option value="">Pilih topik...</option>
+            <option>Memilih sistem hidroponik</option>
+            <option>Pembelian produk & starter kit</option>
+            <option>Masalah tanaman & nutrisi</option>
+            <option>Pelatihan & workshop</option>
+            <option>Kerjasama bisnis</option>
+          </select>
+        </div>
+        <div class="fg"><label>Pesan</label><textarea placeholder="Ceritakan kebutuhanmu..."></textarea></div>
+        <button class="fsend" onclick="sendF()">Kirim Pesan →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ftop">
+    <div class="fbrand">
+      <a href="#beranda" class="flogo">HidroFarm</a>
+      <p>Solusi pertanian hidroponik modern untuk rumah, sekolah, dan bisnis. Bertani lebih cerdas, panen lebih banyak.</p>
+      <div class="socs">
+        <a href="#" class="soc">📸</a>
+        <a href="#" class="soc">▶</a>
+        <a href="#" class="soc">💬</a>
+        <a href="#" class="soc">📘</a>
+      </div>
+    </div>
+    <div class="fcol">
+      <h5>Jelajahi</h5>
+      <ul>
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#tentang">Tentang Hidroponik</a></li>
+        <li><a href="#produk">Produk</a></li>
+        <li><a href="#panduan">Panduan</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>Produk</h5>
+      <ul>
+        <li><a href="#">Starter Kit NFT</a></li>
+        <li><a href="#">Starter Kit DFT</a></li>
+        <li><a href="#">Nutrisi AB Mix</a></li>
+        <li><a href="#">Grow Light LED</a></li>
+        <li><a href="#">Media Tanam</a></li>
+        <li><a href="#">Benih & Bibit</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>Layanan</h5>
+      <ul>
+        <li><a href="#">Konsultasi Gratis</a></li>
+        <li><a href="#">Workshop</a></li>
+        <li><a href="#">Instalasi Rumahan</a></li>
+        <li><a href="#">Program Mitra</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <p>© 2025 HidroFarm. Hak cipta dilindungi.</p>
+    <div class="fblinks">
+      <a href="#">Privasi</a>
+      <a href="#">Syarat & Ketentuan</a>
+      <a href="#">Sitemap</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const obs = new IntersectionObserver((en) => {
+  en.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 55);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.sr').forEach(el => obs.observe(el));
+
+// Filter
+function fp(btn, cat) {
+  document.querySelectorAll('.ftab').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.pc').forEach(c => {
+    c.style.display = (cat === 'all' || c.dataset.c === cat) ? '' : 'none';
+  });
+}
+
+// Add to cart
+function ac(btn) {
+  const orig = btn.textContent;
+  btn.textContent = '✓';
+  btn.style.background = '#30d158';
+  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 1800);
+}
+
+// Form
+function sendF() {
+  alert('Terima kasih! Pesan kamu sudah terkirim.\nTim kami akan menghubungi kamu dalam 1×24 jam. 🌿');
+}
+
+// Navbar border on scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').style.borderBottomColor =
+    window.scrollY > 10 ? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0.07)';
+});
+</script>
+</body>
+</html>
